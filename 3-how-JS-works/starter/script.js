@@ -53,34 +53,65 @@
 // Example to show the differece between execution stack and scope chain
 
 
-var a = 'Hello!';
-first();
-// a = 'hello'
+// var a = 'Hello!';
+// first();
+// // a = 'hello'
 
-function first() {
-  var b = 'Hi!';
-  second();
-  // a = 'Hello'
-  // b = 'Hi'
+// function first() {
+//   var b = 'Hi!';
+//   second();
+//   // a = 'Hello'
+//   // b = 'Hi'
 
-  function second() {
-    var c = 'Hey!';
-    third()
-    // a = 'Hello'
-    // b = 'Hi'
-    // c = 'Hey'
-  }
-}
+//   function second() {
+//     var c = 'Hey!';
+//     third()
+//     // a = 'Hello'
+//     // b = 'Hi'
+//     // c = 'Hey'
+//   }
+// }
 
-function third() {
-  var d = 'John';
-  console.log(a + b + c + d);
-  // a = 'Hello'
-  // d = 'John'
-}
+// function third() {
+//   var d = 'John';
+//   console.log(a + b + c + d);
+//   // a = 'Hello'
+//   // d = 'John'
+// }
 
 
 
 
 ///////////////////////////////////////
 // Lecture: The this keyword
+
+// calcuateAge(22);
+
+// function calcuateAge(year) {
+//   console.log(2019 - year);
+//   console.log(this);
+// }
+
+const john = {
+  name: 'John',
+  yearOfBirth: 1990,
+
+  //math of john object
+  calculateAge: function () {
+    console.log(this);
+    console.log(2016 - this.yearOfBirth);
+
+    // function innerFunction() {
+    //   console.log(this);
+    // }
+    // innerFunction();
+  }
+}
+john.calculateAge();
+
+const mike = {
+  name: 'Mike',
+  yearOfBirth: 1984
+}
+mike.calculateAge = john.calculateAge;
+mike.calculateAge()

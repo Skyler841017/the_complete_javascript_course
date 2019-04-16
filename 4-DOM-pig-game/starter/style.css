@@ -137,7 +137,8 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 45px;}
+.btn-new { top: 63px;}
+.btn-rules { top: 127px; }
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
@@ -158,7 +159,7 @@ i {
 }
 #finalScoreInput:focus{outline: none;}
 .dice {
-    display: none;
+    display: block;
     position: absolute;
     left: 50%;
     top: 178px;
