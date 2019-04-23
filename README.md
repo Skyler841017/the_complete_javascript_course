@@ -1,5 +1,7 @@
 this code from Jonas Schmedtmann's 'The Complete JavaScript Course 2019: Build Real Projects!'.
 
+My learn code is in every starter files
+
 section 1 is course introduction.
 
 section 2 learn about js language basics.
