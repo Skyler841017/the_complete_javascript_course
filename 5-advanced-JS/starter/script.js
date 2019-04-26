@@ -377,13 +377,23 @@ c) correct answer (I would use a number for this)
     }
   }
 
-  Question.prototype.checkAnswer = function() {
+  Question.prototype.checkAnswer = function(answer, callback) {
+    let sc;
     if (answer === this.currectA) {
       console.log('Currect answer!');
+      sc = callback(true); //指到score()裡，最後會回傳score()的sc的值
     } else {
       console.log('Answer isn\'t currect!');
+      sc = callback(false);
     }
+    this.displayScore(sc);
   }
+
+  Question.prototype.displayScore =
+    function (score) {
+      console.log('Your current score is: ' + score);
+      console.log('-----------------------------------------------');
+    }
 
   const q1 = new Question('Is JavaScript the coolest programming language in the world?', ['Yes', 'No'], 0);
   const q2 = new Question('What is the name of this courses\'s teacher?', ['John', 'Michael', 'Johnas'], 2);
@@ -391,11 +401,34 @@ c) correct answer (I would use a number for this)
 
   const questions = [q1, q2, q3];
 
-  const random = (Math.floor(Math.random() * questions.length))
+  function score() {
+    let sc = 0;
+    return function(correct) { // 因為要callback，故先return一個func而不是直接在score括號內加
+      
+      if(correct) {
+        sc++;
+      } 
+      return sc; //回傳sc的值
+    }
 
-  questions[random].displayQuestion();
+  }
 
-  const answer = parseInt(prompt('Please select the correct answer(just type the number).'));
+  const keepScore = score();
 
-  questions[random].checkAnswer(answer);
+  function nextQuestion() {
+    const random = (Math.floor(Math.random() * questions.length));
+
+    questions[random].displayQuestion();
+
+    const input = prompt('Please select the correct answer(just type the number).');
+
+    if (input !== 'exit') {
+
+      questions[random].checkAnswer(parseInt(input), keepScore);
+
+      nextQuestion();
+    }
+  }
+  nextQuestion();
+
 })();
